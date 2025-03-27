@@ -1,0 +1,35 @@
+<!--    app/templates/login.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="" method="post" novalidate class="mx-auto p-2">
+    <h1>Logar</h1>
+    {{ form.hidden_tag() }}
+    
+    <div class="mb-3">
+        <label for="username" class="form-label">{{ form.username.label }}</label>
+        {{ form.username(class_="form-control", id="username", size=32) }}
+        {% for error in form.username.errors %}
+            <span style="color:red">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+    
+    <div class="mb-3">
+        <label for="password" class="form-label">{{ form.password.label }}</label>
+        {{ form.password(class_="form-control", id="password", size=32) }}
+        {% for error in form.password.errors %}
+            <span style="color:red">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+    
+    <div class="mb-3 form-check">
+        {{ form.remember_me(class_="form-check-input", id="rememberMe") }}
+        <label class="form-check-label" for="rememberMe">{{ form.remember_me.label }}</label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+</form>a
+
+{% endblock %}
