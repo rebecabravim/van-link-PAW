@@ -28,6 +28,9 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return db.session.get(User,int(id))
+
+class TransporteTeste(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
     
 class Post(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -42,3 +45,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post{}>'.format(self.body)
+    
+def TransporteTeste():
+    return 0
