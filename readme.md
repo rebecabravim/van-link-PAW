@@ -63,11 +63,11 @@ pip install -r requirements.txt
     - depois do merge o Github te pergunta se você deseja deletar a branch, clique para deletar a branch
     
   - Deletando a branch local:
-    ´´´
+    ```
     git checkout develop
     git pull origin develop
     git branch -d back-end(front-end)/[nome-da-funcao]
-    ´´´
+    ```
 
 
 # Comandos para rodar o app web atraves de um ambiente virtual:
