@@ -64,8 +64,7 @@ pip install -r requirements.txt
     
   - Deletando a branch local:
     ```
-    git checkout develop
-    git pull origin develop
+    git checkout main
     git branch -d back-end(front-end)/[nome-da-funcao]
     ```
 
