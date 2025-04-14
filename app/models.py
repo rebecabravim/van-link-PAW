@@ -90,7 +90,6 @@ class Cliente(db.Model):
     )
     endereco: so.WriteOnlyMapped["Endereco"] = so.relationship(
         back_populates="cliente", 
-        uselist=False # Isso define que é 1 para 1
     )
     viagens: so.WriteOnlyMapped["Viagem"] = so.relationship(
         back_populates="cliente"
@@ -115,7 +114,6 @@ class Instituicao(db.Model):
     cnpj: so.Mapped[str] = so.mapped_column(sa.String(14), index=True, unique=True)
     endereco: so.WriteOnlyMapped["Endereco"] = so.relationship(
         back_populates="instituicao", 
-        uselist=False # Isso define que é 1 para 1
     )
     viagens: so.WriteOnlyMapped["Viagem"] = so.relationship(
         back_populates="instituicao"
