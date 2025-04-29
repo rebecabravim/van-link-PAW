@@ -1,0 +1,72 @@
+# Mechanism for storing package requirements: 
+# PEP 735 – Dependency Groups in pyproject.toml
+# Resolution: 10-Oct-2024
+
+[project]
+name = "U"
+version = "2025.05.0a1"
+dependencies = [
+    "alembic",
+    "blinker",
+    "click",
+    "colorama",
+    "dnspython",
+    "email_validator",
+    "Flask",
+    "flask-bootstrap",
+    "Flask-Migrate",
+    "flask-login",
+    "Flask-SQLAlchemy",
+    "Flask-WTF",
+    "greenlet",
+    "idna",
+    "itsdangerous",
+    "Jinja2",
+    "Mako",
+    "MarkupSafe",
+    "sqlalchemy",
+    "typing_extensions",
+    "Werkzeug",
+    "WTForms"
+
+]
+
+#description = "Communication environment UVV"
+#readme = "README.rst"
+
+# "LICENSE" is name of the license file, which must be in root of project folder
+#license = {file = "LICENSE"}
+#authors = [
+#    {name = "Wanderson Santana", email = "wanderson.santana@uvv.br"},
+#]
+#dynamic = ["version", "description"]
+
+# Required dependencies for install/usage of your package or application
+# If you don't have any dependencies, leave this section empty
+# Format for dependency strings: https://peps.python.org/pep-0508/
+
+#[project.scripts]
+# Command line interface entrypoint scripts
+#acme = "acme.__main__:main"
+
+
+#[project.optional-dependencies]
+#gui = ["PyQt5"]
+
+#dev = [
+#    "tox"
+#]
+
+#test = [
+#    "black==21.9b0",
+#    "pre-commit==2.15.0",
+#    "pytest==6.2.5",
+#    "pytest-cov==3.0.0",
+#]
+
+#[project.scripts]
+#spam-cli = "spam:main_cli"
+
+#deploy = [
+#    "flit==0.1.0",
+#]
