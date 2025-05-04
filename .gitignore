@@ -2,3 +2,4 @@
 __pycache__/
 app.db
 .env
+U.egg-info/
