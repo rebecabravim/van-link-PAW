@@ -79,27 +79,10 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 venv\Scripts\activate
 ```
 
-## Instalar bibliotecas
-Podemos instalar todas de uma vez com o comando:
+## Instalar dependências
+Podemos instalar todas as dependências com o pyproject.toml:
 ```
-pip install -r requirements.txt
-```
-
-Sempre que instalarmos uma biblioteca nova, devemos rodar o seguinte comando:
-```
-pip freeze > requirements.txt
-```
-O comando acima sobrescreve o arquivo requirements.txt com todas as novas biblioteca instaladas.
-
-Se preferir, pode instalar as bibliotecas uma por uma. Segue abaixo a lista de algumas bibliotecas instaladas até o momento:
-```
-py -m pip install --upgrade pip
-pip install flask
-pip install ipython
-pip install flask-wtf
-pip install werkzeug
-pip install flask-login
-pip install flask-sqlalchemy flask-migrate
+pip install -e .
 ```
 
 ## Rodar
@@ -108,13 +91,20 @@ set FLASK_APP=van-link-paw.py
 $env:FLASK_DEBUG = 1
 flask run
 ```
-## Inicio BD
+
+## Inicio BD (só na primeira vez)
 ```
-pip install flask-sqlalchemy flask-migrate
-flask db init
+flask db init 
 ```
-Segurança:
+
+## Atualizar o banco de dados
+```
+flask db migrate -m "initial tables"
+flask db upgrade
+```
+
+## Segurança:
 ```
 pip install werkzeug
 pip install flask-login
-
+```
