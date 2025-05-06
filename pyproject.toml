@@ -27,8 +27,9 @@ dependencies = [
     "sqlalchemy",
     "typing_extensions",
     "Werkzeug",
-    "WTForms"
-
+    "WTForms",
+    "python-dotenv",
+    "psycopg2"
 ]
 
 #description = "Communication environment UVV"
