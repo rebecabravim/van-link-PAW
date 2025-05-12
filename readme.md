@@ -85,6 +85,19 @@ Podemos instalar todas as dependências com o pyproject.toml:
 pip install -e .
 ```
 
+## Nos computadores do lab
+Instalar a extensão do PowerShell e criar um Script .ps1 contendo:
+```
+if ( -Not (Test-Path "venv")) {
+    py -m venv venv
+}
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+. .\venv\Scripts\Activate.ps1
+py -m pip install --upgrade pip
+pip install -e .
+```
+
 ## Rodar
 ```
 set FLASK_APP=van-link-paw.py
