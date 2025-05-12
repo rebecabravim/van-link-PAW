@@ -101,7 +101,7 @@ def edit_profile():
 
 @app.route('/api/users')
 def api_users():
-    users = User.query.all()  
+    users = Cliente.query.all()  
     user_list = [
         {"id": u.id, "nome": u.username, "email": u.email}
         for u in users
