@@ -27,7 +27,7 @@ Antes de começar a trabalha, troque para o powershell. Após isso, ative o ambi
 
 ```
 venv\Scripts\activate
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### 3. Finalizando fluxo de trabalho
@@ -35,7 +35,9 @@ pip install -r requirements.txt
 
   Lembre-se sempre de manter o arquivo das dependências do projeto atualizado, com as novas bibliotecas que você instalou.
   ```
-  pip freeze > requirements.txt
+  "python-dotenv",
+  "psycopg2",
+  "NovaBiblioteca"
   ```
 
 - *Comite as Alterações:*
@@ -72,21 +74,19 @@ pip install -r requirements.txt
 # Comandos para rodar o app web atraves de um ambiente virtual:
 
 
-## 1. Iniciar ambiente virtual
-```
-py -m venv venv
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-venv\Scripts\activate
-```
+## Se você já tem o projeto instalado
+Abra o ambiente virtual e lembre-se sempre de baixar as dependências
 
-## Instalar dependências
-Podemos instalar todas as dependências com o pyproject.toml:
 ```
+venv\Scripts\activate
 pip install -e .
 ```
 
-## Nos computadores do lab
-Instalar a extensão do PowerShell e criar um Script .ps1 contendo:
+## Caso contrário inicialize o projeto com o script startproject.ps1
+```
+.\startproject.ps1
+```
+startproject.ps1
 ```
 if ( -Not (Test-Path "venv")) {
     py -m venv venv
@@ -96,12 +96,18 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 . .\venv\Scripts\Activate.ps1
 py -m pip install --upgrade pip
 pip install -e .
+set FLASK_APP=van-link-paw.py
+```
+
+## Configuração para DEBUG
+Para ligar '1' para desligar '0'
+
+```
+$env:FLASK_DEBUG = 1
 ```
 
 ## Rodar
 ```
-set FLASK_APP=van-link-paw.py
-$env:FLASK_DEBUG = 1
 flask run
 ```
 
@@ -114,10 +120,4 @@ flask db init
 ```
 flask db migrate -m "initial tables"
 flask db upgrade
-```
-
-## Segurança:
-```
-pip install werkzeug
-pip install flask-login
 ```
