@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>Ola, {{ current_user.username }}!</p>
+    <p>Ola, {{ current_user.nome }}!</p>
 
     {% for post in posts %}
     <div><p>{{ post.author.username }} disse: <b>{{ post.body }}</b></p></div>

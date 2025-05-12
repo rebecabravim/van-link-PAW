@@ -1,5 +1,6 @@
 /venv
 __pycache__/
 app.db
+/migrations
 .env
 U.egg-info/

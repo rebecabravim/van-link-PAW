@@ -13,14 +13,16 @@
     <tr valign="top">
         <td>
             <img src="{{user.avatar(128)}}">
-            {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
-            {% if user.last_seen %}<p>Lastseenon:{{user.last_seen}}</p>{% endif %}
+            <!-- {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
+            {% if user.last_seen %}<p>Lastseenon:{{user.last_seen}}</p>{% endif %} -->
+            <p>Conta: {{user}}</p>
         </td>
-        <td><h1>User: {{user.username}}</h1></td>
+        <td>
+            <h1>User: {{user.username}}</h1><br>
+            <p>CPF: {{user.cpf}}</p><br>
+            <p>E-mail: {{user.email}}</p>
+        </td>
     </tr>
 </table>
 <hr>
-{% for post in posts %}
-{% include '_post.html' %}
-{% endfor %}
 {% endblock %}
