@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, jsonify
 from app.forms import LoginForm , RegistrationForm, EditProfileForm
 from urllib.parse import urlsplit
 from flask_login import login_user, logout_user, current_user, login_required
@@ -97,3 +97,13 @@ def edit_profile():
         form.username.data=current_user.username
     return render_template('edit_profile.html',title='EditProfile',
                             form=form)
+
+
+@app.route('/api/users')
+def api_users():
+    users = User.query.all()  
+    user_list = [
+        {"id": u.id, "nome": u.username, "email": u.email}
+        for u in users
+    ]
+    return jsonify(user_list)
