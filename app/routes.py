@@ -71,6 +71,11 @@ def user(username):
     ]
     return render_template('user.html', user=user, posts=posts)
 
+# cria banco ao subir o servidor web, necessário apenas uma vez
+# @app.before_request
+# def ensure_tables_exist():
+#     db.create_all()
+
 @app.before_request
 def before_request():
     if current_user.is_authenticated:

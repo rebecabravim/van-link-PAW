@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.login
+{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'poppins', sans-serif;
+}
+
+.form
+{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    background-color: #373858;
+    color: white;
+    min-width: 500px;
+    box-shadow: -2px 0 5px rgb(54, 54, 54);
+}
+
+.side
+{
+    
+    flex: auto;
+    width: min-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.vanlink_logo
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vanlink_img
+{
+    min-width: 300px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}
+.texto_logo span
+{
+    color: orange;
+    font-weight: bold;
+}
+
+.texto_logo
+{
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+button
+{
+    width: 100%;
+}
+
+button:hover
+{
+    background-color: blue;
+}
+a
+{
+    color: orange;
+    font-style: normal;
+    text-decoration: none;
+}
+a:hover
+{
+    color: rgb(255, 184, 53);
+    
+}
+
+.form-control:focus
+{
+    box-shadow: 2px 2px 2px orange;
+}
