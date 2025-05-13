@@ -1,11 +1,46 @@
-<!-- app/templates/index.html -->
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/index.css') }}">
+{% endblock %}
+
 {% block content %}
-    <p>Ola, {{ current_user.nome }}!</p>
+<div class="container">
+    <div class="texto">
+        <p>Olá, {{ current_user.nome }}! Para onde quer ir hoje?</p>
+    </div>
+    
+    <div class="caixa">
+        <input type="text" placeholder="Origem">
+        <input type="text" placeholder="Destino">
+        <input type="date" placeholder="Ida">
+        <input type="date" placeholder="Volta">
+        <button class="search-button">🔍</button>
+    </div>
 
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} disse: <b>{{ post.body }}</b></p></div>
+    <h2 class="recent-title">Sugestões para você</h2>
+<div class="recent-grid">
+    <div class="recent-item">
+        <img src="{{ url_for('static', filename='img/ufes.jpg') }}" alt="UFES">
+        <div class="info">
+            <strong>UFES</strong>
+            <span>Embarque em...<br>XX de Abril</span>
+        </div>
+    </div>
+    <div class="recent-item">
+        <img src="{{ url_for('static', filename='img/uvv.jpg') }}" alt="UVV">
+        <div class="info">
+            <strong>UVV</strong>
+            <span>Embarque em...<br>XX de Abril</span>
+        </div>
+    </div>
+    <div class="recent-item">
+        <img src="{{ url_for('static', filename='img/multivix.jpg') }}" alt="MULTIVIX">
+        <div class="info">
+            <strong>MULTIVIX</strong>
+            <span>Embarque em...<br>XX de Abril</span>
+        </div>
+    </div>
+</div>
 
-    {% endfor %}
 {% endblock %}

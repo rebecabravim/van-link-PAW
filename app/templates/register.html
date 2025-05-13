@@ -1,44 +1,78 @@
 <!-- app/templates/register.html -->
-{% extends "base.html" %}
+
+{% extends "bootstrap.html" %}
+
 {% block content %}
-<h1>Register</h1>
-<form action= "" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{form.username.label}}<br>
-        {{form.username(size=32)}}<br>
-        {% for error in form.username.errors %}
-        <span style="color:red;">[{{error}}]</span>
-        {%endfor%}
-    </p>
-    <p>
-        {{form.cpf.label}}<br>
-        {{form.cpf(size=32)}}<br>
-        {% for error in form.cpf.errors %}
-        <span style="color:red;">[{{error}}]</span>
-        {%endfor%}
-    </p>
-    <p>
-        {{form.email.label}}<br>
-        {{form.email(size=64)}}<br>
-        {% for error in form.email.errors %}
-        <span style="color:red;">[{{error}}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{form.password.label}}<br>
-        {{form.password(size=32)}}<br>
-        {% for error in form.password.errors%}
-        <span style="color:red;">[{{error}}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{form.password2.label}}<br>
-        {{form.password2(size=32)}}<br>
-        {% for error in form.password2.errors%}
-        <spans tyle="color:red;">[{{error}}]</span>
-        {%endfor%}
-    </p>
-    <p>{{form.submit()}}</p>
-</form>
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/login.css') }}">
+
+
+<section class="login">
+    <div class="side">
+        <div class="vanlink_logo">
+            <img src="../static/img/vanlink_Img.png" alt="VanLink Logo" class="vanlink_img">
+        </div>
+        <div class="texto_logo">
+            A <span>solução</span> do transporte acadêmico!
+        </div>
+    </div>
+    <div class="form">
+        <form action="" method="post" novalidate class="mx-auto p-2">
+            <h1>Registrar</h1>
+            
+
+            <div class="mb-3">
+                <label for="username" class="form-label">{{ form.username.label }}</label>
+                {{ form.username(class_="form-control", id="username", size=32) }}
+                {% for error in form.username.errors %}
+                    <span style="color:red">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">{{ form.email.label }}</label>
+                {{ form.email(class_="form-control", id="email", size=32) }}
+                {% for error in form.email.errors %}
+                    <span style="color:red">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label for="cpf" class="form-label">{{ form.cpf.label }}</label>
+                {{ form.cpf(class_="form-control", id="cpf", size=32) }}
+                {% for error in form.cpf.errors %}
+                    <span style="color:red">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">{{ form.password.label }}</label>
+                {{ form.password(class_="form-control", id="password", size=32) }}
+                {% for error in form.password.errors %}
+                    <span style="color:red">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label for="password2" class="form-label">{{ form.password2.label }}</label>
+                {{ form.password2(class_="form-control", id="password2", size=32) }}
+                {% for error in form.password2.errors %}
+                    <span style="color:red">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            {{ form.hidden_tag() }}
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                {% for message in messages %}
+                    <div class="alert-success">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+        </form>
+        <p>Já tem uma conta? <a href="{{ url_for('login') }}">Clique para entrar!</a></p>
+    </div>
+</section>
 {% endblock %}

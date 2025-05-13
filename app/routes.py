@@ -33,7 +33,7 @@ def login():
         user = db.session.scalar(
             sa.select(Cliente).where(Cliente.nome == form.username.data)) 
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Senha ou Nome inválidos')
             return  redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -57,8 +57,8 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
+        flash('Parabéns, agora você é um usuário registrado!')
+        return redirect(url_for('login', success=True))
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/user/<username>')
@@ -103,7 +103,7 @@ def edit_profile():
 def api_users():
     users = Cliente.query.all()  
     user_list = [
-        {"id": u.id, "nome": u.username, "email": u.email}
+        {"id": u.id, "nome": u.nome, "email": u.email}
         for u in users
     ]
     return jsonify(user_list)

@@ -18,18 +18,7 @@
     <div class="form">
         <form action="" method="post" novalidate class="mx-auto p-2">
             <h1>Logar</h1>
-            {{ form.hidden_tag() }}
-                    
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-
-            {% endif %}
-            {% endwith %}
+            
         
             <div class="mb-3">
                 <label for="username" class="form-label">{{ form.username.label }}</label>
@@ -51,10 +40,23 @@
                 {{ form.remember_me(class_="form-check-input", id="rememberMe") }}
                 <label class="form-check-label" for="rememberMe">{{ form.remember_me.label }}</label>
             </div>
-        
+            {{ form.hidden_tag() }}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                {% for message in messages %}
+                    {% if request.args.success %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% else %}
+                        <div class="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
             <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
         </form>
-        <p>New User? <a href="{{url_for('register')}}">Click to Register!</a></p>
+        <p>Novo usuário? <a href="{{url_for('register')}}">Registrar</a></p>
     </div>
 </section>
 {% endblock %}
