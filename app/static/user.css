@@ -1,0 +1,89 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2e3050; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+}
+
+.edit_profile{
+    margin-top: 30px;
+}
+
+/* Link de editar */
+#edit-profile-link {
+    color: #ffffff;
+    margin-left: 5%;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#edit-profile-link:hover {
+    text-decoration: underline;
+}
+
+/* Separadores */
+#user-separator-top,
+#user-separator-bottom {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 2rem auto;
+    width: 90%;
+}
+
+/* Container do perfil */
+#user-profile-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: #2e3050;
+}
+
+/* Imagem */
+#user-profile-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #2e3050;
+}
+
+/* Informações */
+#user-profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#user-name {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.user-profile-label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    #user-profile-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #user-profile-avatar {
+        margin-bottom: 1rem;
+    }
+}

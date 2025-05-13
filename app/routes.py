@@ -4,7 +4,7 @@ from app.forms import LoginForm , RegistrationForm, EditProfileForm
 from urllib.parse import urlsplit
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
-from app.models import User
+from app.models import Cliente
 from datetime import datetime, timezone
 
 @app.route('/')
@@ -31,9 +31,9 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = db.session.scalar(
-            sa.select(User).where(User.username == form.username.data)) 
+            sa.select(Cliente).where(Cliente.nome == form.username.data)) 
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Senha ou Nome inválidos')
             return  redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -53,18 +53,18 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = Cliente(nome=form.username.data, cpf=form.cpf.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
+        flash('Parabéns, agora você é um usuário registrado!')
+        return redirect(url_for('login', success=True))
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/user/<username>')
 @login_required
 def user(username):
-    user = db.first_or_404(sa.select(User).where(User.username == username))
+    user = db.first_or_404(sa.select(Cliente).where(Cliente.nome == username))
     posts = [
         {'author': user, 'body': 'Test post #1'},
         {'author': user, 'body': 'Test post #2'}
@@ -87,23 +87,23 @@ def before_request():
 def edit_profile():
     form=EditProfileForm()
     if form.validate_on_submit():
-        current_user.username=form.username.data
-        current_user.about_me=form.about_me.data
+        current_user.nome=form.username.data
+        current_user.email=form.email.data
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('edit_profile'))
     elif request.method=='GET':
-        form.username.data=current_user.username
-        form.username.data=current_user.username
+        form.username.data=current_user.nome
+        form.email.data=current_user.email
     return render_template('edit_profile.html',title='EditProfile',
                             form=form)
 
 
 @app.route('/api/users')
 def api_users():
-    users = User.query.all()  
+    users = Cliente.query.all()  
     user_list = [
-        {"id": u.id, "nome": u.username, "email": u.email}
+        {"id": u.id, "nome": u.nome, "email": u.email}
         for u in users
     ]
     return jsonify(user_list)

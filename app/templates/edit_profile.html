@@ -1,25 +1,44 @@
-<!--app/templates/edit_profile.html-->
+{% extends "base.html" %}
 
-{% extends"base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/edit_profile.css') }}">
 
-{%block content%}
-<h1>EditProfile</h1>
-<form action=""method="post">
-    {{form.hidden_tag()}}
-    <p>
-        {{form.username.label}}<br>
-        {{form.username(size=32)}}<br>
-        {%for error in form.username.errors %}
-        <span style="color:red;">[{{error}}]</span>
-        {%endfor%}
-    </p>
-    <p>
-        {{form.about_me.label}}<br>
-        {{form.about_me(cols=50,rows=4)}}<br>
-        {%for error in form.about_me.errors%}
-        <span style="color:red;">[{{error}}]</span>
-        {%endfor%}
-    </p>
-    <p>{{form.submit()}}</p>
-</form>
+<div class="edit-profile-wrapper">
+    <form action="" method="post" class="edit-profile-box">
+        <h1>Editar Perfil</h1>
+        {{ form.hidden_tag() }}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-message">
+            {% for message in messages %}
+                {% if request.args.success %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% else %}
+                    <div class="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="mb-3">
+            <label for="username">{{ form.username.label }}</label>
+            {{ form.username(class_="form-control", id="username", size=32) }}
+            {% for error in form.username.errors %}
+                <span>[{{ error }}]</span>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="email">{{ form.email.label }}</label>
+            {{ form.email(class_="form-control", id="email", size=64) }}
+            {% for error in form.email.errors %}
+                <span>[{{ error }}]</span>
+            {% endfor %}
+        </div>
+
+        {{ form.submit(class_="btn btn-primary") }}
+    </form>
+</div>
 {% endblock %}

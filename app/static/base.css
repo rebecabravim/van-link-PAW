@@ -1,0 +1,26 @@
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #6283cc;
+    padding: 10px 20px;
+    color: white;
+}
+
+.img {
+    display: flex;
+    align-items: center;
+}
+
+.conteudo a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.conteudo a:hover {
+    color: #ffae00; 
+}
