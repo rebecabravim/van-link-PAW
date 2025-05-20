@@ -8,20 +8,6 @@
         <h1>Editar Perfil</h1>
         {{ form.hidden_tag() }}
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash-message">
-            {% for message in messages %}
-                {% if request.args.success %}
-                    <div class="alert alert-success">{{ message }}</div>
-                {% else %}
-                    <div class="alert">{{ message }}</div>
-                {% endif %}
-            {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
-
         <div class="mb-3">
             <label for="username">{{ form.username.label }}</label>
             {{ form.username(class_="form-control", id="username", size=32) }}

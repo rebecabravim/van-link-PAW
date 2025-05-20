@@ -10,19 +10,69 @@
 <div class="edit_profile">
     <p><a id="edit-profile-link" href="{{ url_for('edit_profile') }}">Editar perfil</a></p>
 </div>
-
 {% endif %}
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-message">
+            {% for message in messages %}
+                {% if request.args.success %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% else %}
+                    <div class="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
 <hr id="user-separator-top">
 
 <div id="user-profile-container">
     <img id="user-profile-avatar" src="{{ user.avatar(256) }}" alt="Avatar">
     <div id="user-profile-info">
         <h1 id="user-name">{{ current_user.nome }}</h1>
-        <p class="user-profile-label"><strong>Tipo:</strong> {{ user }}</p>
+        <p class="user-profile-label"><strong>Conta:</strong> {{ user }}</p>
         <p class="user-profile-label"><strong>E-mail:</strong> {{ user.email }}</p>
         <p class="user-profile-label"><strong>CPF:</strong> {{ user.cpf }}</p>
     </div>
 </div>
 
 <hr id="user-separator-bottom">
+<ul class="list-group">
+  {% for viagem in user.viagens_agendadas %}
+    <li class="list-group-item d-flex justify-content-between align-items-center" data-index="{{ loop.index0 }}">
+      {{ viagem.origem }} → {{ viagem.destino }} em {{ viagem.data }}, Ida e Volta: {{ viagem.ida }}-{{ viagem.volta }}, Preço: R${{ viagem.preco }}
+      <button class="btn-remover">❌</button>
+    </li>
+  {% else %}
+    <li class="list-group-item">Nenhuma viagem agendada.</li>
+  {% endfor %}
+</ul>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-remover').forEach(button => {
+      button.addEventListener('click', function () {
+        const li = this.closest('li');
+        const index = li.dataset.index;
+
+        fetch("/remover_viagem", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ index: index })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            li.remove();  // Remove do DOM apenas se o back-end confirmou
+            window.location.reload();
+          } else {
+            alert("Erro ao remover a viagem.");
+          }
+        });
+      });
+    });
+  });
+</script>
 {% endblock %}

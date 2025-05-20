@@ -64,6 +64,10 @@ body {
     background-color: #e2e2e2;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .recent-title {
     font-size: 1.8rem;
     font-weight: bold;

@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, flash, redirect, url_for, request, jsonify
+from flask import render_template, flash, redirect, url_for, request, jsonify, session
 from app.forms import LoginForm , RegistrationForm, EditProfileForm
 from urllib.parse import urlsplit
 from flask_login import login_user, logout_user, current_user, login_required
@@ -65,11 +65,14 @@ def register():
 @login_required
 def user(username):
     user = db.first_or_404(sa.select(Cliente).where(Cliente.nome == username))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
+
+    # Apenas para o próprio usuário, adiciona as viagens da sessão
+    if current_user == user:
+        user.viagens_agendadas = session.get('viagens_agendadas', [])
+    else:
+        user.viagens_agendadas = []
+
+    return render_template('user.html', user=user)
 
 # cria banco ao subir o servidor web, necessário apenas uma vez
 # @app.before_request
@@ -90,14 +93,56 @@ def edit_profile():
         current_user.nome=form.username.data
         current_user.email=form.email.data
         db.session.commit()
-        flash('Your changes have been saved.')
-        return redirect(url_for('edit_profile'))
+        flash('Mudanças salvas com sucesso.')
+        return redirect(url_for('user', username=current_user.nome))
     elif request.method=='GET':
         form.username.data=current_user.nome
         form.email.data=current_user.email
     return render_template('edit_profile.html',title='EditProfile',
                             form=form)
 
+@app.route('/agendar', methods=['POST'])
+@login_required
+def agendar_viagem():
+    dados = request.get_json()
+
+    if not dados:
+        return jsonify({'error': 'Dados ausentes'}), 400
+
+    viagem = {
+        'origem': dados.get('origem'),
+        'destino': dados.get('destino'),
+        'data': dados.get('data'),
+        'preco': dados.get('preco'),
+        'ida': dados.get('ida'),
+        'volta': dados.get('volta')
+    }
+
+    # Inicializa a lista se ainda não existir
+    if 'viagens_agendadas' not in session:
+        session['viagens_agendadas'] = []
+
+    # Adiciona a viagem à sessão
+    viagens = session['viagens_agendadas']
+    viagens.append(viagem)
+    session['viagens_agendadas'] = viagens
+
+    return jsonify({'success': True})
+
+@app.route('/remover_viagem', methods=['POST'])
+@login_required
+def remover_viagem():
+    dados = request.get_json()
+    try:
+        index = int(dados.get('index'))
+    except (ValueError, TypeError):
+        return jsonify({"success": False, "error": "Índice inválido"}), 400
+
+    if "viagens_agendadas" in session and 0 <= index < len(session["viagens_agendadas"]):
+        session["viagens_agendadas"].pop(index)
+        session.modified = True
+        return jsonify({"success": True})
+    return jsonify({"success": False, "error": "Índice fora do intervalo"}), 400
 
 @app.route('/api/users')
 def api_users():

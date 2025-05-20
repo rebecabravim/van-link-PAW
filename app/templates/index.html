@@ -7,14 +7,14 @@
 {% block content %}
 <div class="container">
     <div class="texto">
-        <p>Olá, {{ current_user.nome }}! Para onde quer ir hoje?</p>
+        <p>Olá, {{ current_user.nome }}! Para onde quer ir?</p>
     </div>
     
     <div class="caixa">
-        <input type="text" placeholder="Origem">
-        <input type="text" placeholder="Destino">
-        <input type="date" placeholder="Ida">
-        <input type="date" placeholder="Volta">
+        <input id="input-origem" type="text" placeholder="Origem">
+        <input id="input-destino" type="text" placeholder="Destino">
+        <input id="input-inicio" type="date" placeholder="Inicio">
+        <input id="input-fim" type="date" placeholder="Fim">
         <button class="search-button">🔍</button>
     </div>
 
@@ -41,6 +41,247 @@
             <span>Embarque em...<br>XX de Abril</span>
         </div>
     </div>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                {% for message in messages %}
+                    {% if request.args.success %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% else %}
+                        <div class="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+</div>
+<div id="viagens-encontradas" class="recent-grid hidden">
+    <h2 id="queryTitle" class="recent-title">Viagens encontradas</h2>
+    <div class="recent-item viagem-card" data-origem="Guarapari" data-destino="UVV" data-data="2025-06-02" data-ida="6:00" data-volta="12:00" data-preco="25.99">
+        <div class="info">
+            <strong>Guarapari → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 02/06/2025</span>
+            <span>Preço: R$25.99</span>
+            <button class="agendar-button"
+                data-origem="Guarapari"
+                data-destino="UVV"
+                data-data="2025-06-02"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="25.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Guarapari" data-destino="UVV" data-data="2025-06-03" data-ida="6:00" data-volta="12:00" data-preco="25.99">
+        <div class="info">
+            <strong>Guarapari → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 03/06/2025</span>
+            <span>Preço: R$25.99</span>
+            <button class="agendar-button"
+                data-origem="Guarapari"
+                data-destino="UVV"
+                data-data="2025-06-03"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="25.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Guarapari" data-destino="UVV" data-data="2025-06-04" data-ida="6:00" data-volta="12:00" data-preco="25.99">
+        <div class="info">
+            <strong>Guarapari → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 04/06/2025</span>
+            <span>Preço: R$25.99</span>
+            <button class="agendar-button"
+                data-origem="Guarapari"
+                data-destino="UVV"
+                data-data="2025-06-04"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="25.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Guarapari" data-destino="UVV" data-data="2025-06-05" data-ida="6:00" data-volta="12:00" data-preco="25.99">
+        <div class="info">
+            <strong>Guarapari → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 05/06/2025</span>
+            <span>Preço: R$25.99</span>
+            <button class="agendar-button"
+                data-origem="Guarapari"
+                data-destino="UVV"
+                data-data="2025-06-05"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="25.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Guarapari" data-destino="UVV" data-data="2025-06-06" data-ida="6:00" data-volta="12:00" data-preco="25.99">
+        <div class="info">
+            <strong>Guarapari → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 06/06/2025</span>
+            <span>Preço: R$25.99</span>
+            <button class="agendar-button"
+                data-origem="Guarapari"
+                data-destino="UVV"
+                data-data="2025-06-06"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="25.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Vitória" data-destino="UVV" data-data="2025-05-26" data-ida="6:00" data-volta="12:00" data-preco="19.99">
+        <div class="info">
+            <strong>Vitória → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 26/05/2025</span>
+            <span>Preço: R$19.99</span>
+            <button class="agendar-button"
+                data-origem="Vitória"
+                data-destino="UVV"
+                data-data="2025-05-26"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="19.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Vitória" data-destino="UVV" data-data="2025-05-27" data-ida="6:00" data-volta="12:00" data-preco="19.99">
+        <div class="info">
+            <strong>Vitória → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 27/05/2025</span>
+            <span>Preço: R$19.99</span>
+            <button class="agendar-button"
+                data-origem="Vitória"
+                data-destino="UVV"
+                data-data="2025-05-27"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="19.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Vitória" data-destino="UVV" data-data="2025-05-28" data-ida="6:00" data-volta="12:00" data-preco="19.99">
+        <div class="info">
+            <strong>Vitória → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 28/05/2025</span>
+            <span>Preço: R$19.99</span>
+            <button class="agendar-button"
+                data-origem="Vitória"
+                data-destino="UVV"
+                data-data="2025-05-28"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="19.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Vitória" data-destino="UVV" data-data="2025-05-29" data-ida="6:00" data-volta="12:00" data-preco="19.99">
+        <div class="info">
+            <strong>Vitória → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 29/05/2025</span>
+            <span>Preço: R$19.99</span>
+            <button class="agendar-button"
+                data-origem="Vitória"
+                data-destino="UVV"
+                data-data="2025-05-29"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="19.99">Agendar
+            </button>
+        </div>
+    </div>
+    <div class="recent-item viagem-card" data-origem="Vitória" data-destino="UVV" data-data="2025-05-30" data-ida="6:00" data-volta="12:00" data-preco="19.99">
+        <div class="info">
+            <strong>Vitória → UVV</strong>
+            <span>Ida e Volta: 6:00 - 12:00</span>
+            <span>Data: 30/05/2025</span>
+            <span>Preço: R$19.99</span>
+            <button class="agendar-button"
+                data-origem="Vitória"
+                data-destino="UVV"
+                data-data="2025-05-30"
+                data-ida="6:00"
+                data-volta="12:00"
+                data-preco="19.99">Agendar
+            </button>
+        </div>
+    </div>
+    <!-- Adicione mais cards conforme necessário -->
 </div>
 
+<script>
+document.querySelector('.search-button').addEventListener('click', function () {
+    const origemInput = document.getElementById('input-origem').value.trim().toLowerCase();
+    const destinoInput = document.getElementById('input-destino').value.trim().toLowerCase();
+    const inicioInput = document.getElementById('input-inicio').value;
+    const fimInput = document.getElementById('input-fim').value;
+
+    const cards = document.querySelectorAll('.viagem-card');
+    let encontrou = false;
+
+    cards.forEach(card => {
+        const origem = card.dataset.origem.toLowerCase();
+        const destino = card.dataset.destino.toLowerCase();
+        const data = card.dataset.data;
+
+        const dentroData = (!inicioInput || !fimInput) || (data >= inicioInput && data <= fimInput);
+        const origemIgual = !origemInput || origem.includes(origemInput);
+        const destinoIgual = !destinoInput || destino.includes(destinoInput);
+
+        if (origemIgual && destinoIgual && dentroData) {
+            card.style.display = 'block';
+            encontrou = true;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    const container = document.getElementById('viagens-encontradas');
+    if (encontrou) {
+        container.classList.remove('hidden');
+    } else {
+        container.classList.add('hidden');
+    }
+});
+
+// Agendar viagem via AJAX
+document.querySelectorAll('.agendar-button').forEach(button => {
+    button.addEventListener('click', function () {
+        const card = this.closest('.viagem-card');
+        const viagemData = {
+            origem: card.dataset.origem,
+            destino: card.dataset.destino,
+            data: card.dataset.data,
+            preco: card.dataset.preco,
+            ida: card.dataset.ida,
+            volta: card.dataset.volta
+        };
+
+        fetch('/agendar', {
+            method: 'POST',
+            body: JSON.stringify(viagemData),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const check = document.createElement('span');
+                check.innerHTML = '✔';
+                this.replaceWith(check);
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
