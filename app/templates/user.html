@@ -41,14 +41,22 @@
 <hr id="user-separator-bottom">
 <ul class="list-group">
   {% for viagem in user.viagens_agendadas %}
-    <li class="list-group-item d-flex justify-content-between align-items-center" data-index="{{ loop.index0 }}">
-      {{ viagem.origem }} → {{ viagem.destino }} em {{ viagem.data }}, Ida e Volta: {{ viagem.ida }}-{{ viagem.volta }}, Preço: R${{ viagem.preco }}
-      <button class="btn-remover">❌</button>
+    <li class="list-group-item" data-index="{{ loop.index0 }}">
+      <div class="viagem-card">
+        <div class="viagem-info">
+          <span>{{ viagem.origem }} → {{ viagem.destino }}</span>
+          <span class="viagem-data">{{ viagem.data }}</span>
+          <span>Ida e Volta: {{ viagem.ida }} - {{ viagem.volta }}</span>
+          <span class="viagem-preco">Preço: R$ {{ viagem.preco }}</span>
+        </div>
+        <button class="btn-remover" aria-label="Remover viagem">❌</button>
+      </div>
     </li>
   {% else %}
     <li class="list-group-item">Nenhuma viagem agendada.</li>
   {% endfor %}
 </ul>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
