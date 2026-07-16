@@ -1,13 +1,17 @@
-# Manual de Gerenciamento de Branches e Commits
+# DESCRIÇÃO
+- Implementação em Flask de projeto Van-Link: construção de software de serviço de gerenciamento de transporte universitário. 
+- Público-alvo: motoristas de vans que prestam transporte universitário.
 
-## Introdução
+## Manual de Gerenciamento de Branches e Commits
+
+### Introdução
 
 Para manter a organização e o controle sobre o desenvolvimento do projeto, utilizaremos um fluxo de trabalho específico para o gerenciamento de branches e commits no Git. 
 Este manual descreve o processo que cada membro da equipe deve seguir ao trabalhar em novas funcionalidades ou correções de bugs e ao preparar código para a produção.
 
-## Fluxo de Trabalho
+### Fluxo de Trabalho
 
-### 1. Criando uma Nova Branch
+#### 1. Criando uma Nova Branch
 
 Antes de começar a trabalhar em qualquer alteração no código, é necessário criar uma nova branch baseada na branch develop. 
 Dependendo do tipo de trabalho, as branches seguirão um padrão de nomenclatura específico:
@@ -21,7 +25,7 @@ Dependendo do tipo de trabalho, as branches seguirão um padrão de nomenclatura
     git checkout -b back-end(front-end)/[nome-da-funcao]
     ```
 
-### 2. Instale as novas dependências do projeto
+#### 2. Instale as novas dependências do projeto
 
 Antes de começar a trabalha, troque para o powershell. Após isso, ative o ambiente virtual e instale as novas bibliotecas.
 
@@ -30,7 +34,7 @@ venv\Scripts\activate
 pip install -e .
 ```
 
-### 3. Finalizando fluxo de trabalho
+#### 3. Finalizando fluxo de trabalho
 - *Não se esqueça das novas bibliotecas:*
 
   Lembre-se sempre de manter o arquivo das dependências do projeto atualizado, com as novas bibliotecas que você instalou.
@@ -71,10 +75,10 @@ pip install -e .
     ```
 
 
-# Comandos para rodar o app web atraves de um ambiente virtual:
+## Comandos para rodar o app web atraves de um ambiente virtual:
 
 
-## Se você já tem o projeto instalado
+### Se você já tem o projeto instalado
 Abra o ambiente virtual e lembre-se sempre de baixar as dependências
 
 ```
@@ -82,7 +86,7 @@ venv\Scripts\activate
 pip install -e .
 ```
 
-## Caso contrário inicialize o projeto com o script startproject.ps1
+### Caso contrário inicialize o projeto com o script startproject.ps1
 ```
 .\startproject.ps1
 ```
@@ -99,24 +103,24 @@ pip install -e .
 set FLASK_APP=van-link-paw.py
 ```
 
-## Configuração para DEBUG
+### Configuração para DEBUG
 Para ligar '1' para desligar '0'
 
 ```
 $env:FLASK_DEBUG = 1
 ```
 
-## Rodar
+### Rodar
 ```
 flask run
 ```
 
-## Inicio BD (só na primeira vez)
+### Inicio BD (só na primeira vez)
 ```
 flask db init 
 ```
 
-## Atualizar o banco de dados
+### Atualizar o banco de dados
 ```
 flask db migrate -m "initial tables"
 flask db upgrade
